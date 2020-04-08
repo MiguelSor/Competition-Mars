@@ -6,6 +6,7 @@ using OpenQA.Selenium.Firefox;
 using RelevantCodes.ExtentReports;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,28 +72,20 @@ namespace MarsFramework.Global
         }
 
 
-        [TearDown]
-        public void TearDown()
-        {
-            // Screenshot
-            String img = SaveScreenShotClass.SaveScreenshot(GlobalDefinitions.Driver, "Report");//AddScreenCapture(@"E:\Dropbox\VisualStudio\Projects\Beehive\TestReports\ScreenShots\");
-            //Start Report
-            test = extent.StartTest("Task","Miguel's Report");
-            //Log the info
-            test.Log(LogStatus.Info, "Image example: " + img);
-            //Pass Scenario
-            test.Log(LogStatus.Pass, "Test Pass");
-            // end test (Reports)
-            extent.EndTest(test);
-            // calling Flush writes everything to the log file (Reports)
-            extent.Flush();
-            //Close Extent Reports
-            extent.Close();
-            // Close the driver
-            GlobalDefinitions.Driver.Quit();
-
-
-        }
+[TearDown]
+public void TearDown()
+{
+// Screenshot
+String img = SaveScreenShotClass.SaveScreenshot(GlobalDefinitions.Driver, "Report");//AddScreenCapture(@"E:\Dropbox\VisualStudio\Projects\Beehive\TestReports\ScreenShots\");
+test = extent.StartTest("Steps Log Generations");
+test.Log(LogStatus.Info, "Image example: " + img);
+// end test. (Reports)
+extent.EndTest(test);
+// calling Flush writes everything to the log file (Reports)
+//extent.Flush(); Removed because causes error to happen.
+// Close the driver :)
+GlobalDefinitions.Driver.Quit();
+}
         #endregion
     }
 }

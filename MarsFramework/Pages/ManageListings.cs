@@ -122,7 +122,27 @@ namespace MarsFramework.Pages
 
         internal void DeleteShareSkill()
         {
+            //Wait for Manage Listings to appear
+            GlobalDefinitions.WaitForElement(GlobalDefinitions.Driver, By.LinkText("Manage Listings"), (20));
 
+            //Click on Manage Listings
+            manageListingsLink.Click();
+
+            //Wait for the Title of the listing to appear
+            GlobalDefinitions.WaitForElement(GlobalDefinitions.Driver, By.XPath("//*[contains(text(),'Title Edited')]"), (20));
+
+            //See if listing is displayed and click on edit icon of that listing
+            if (EditListingsLink.Displayed && edit.Displayed)
+            {
+                if (EditListingsLink.Text == "Title Edited" && edit.Equals(GlobalDefinitions.Driver.FindElement(By.XPath("(//i[@class='outline write icon'])"))))
+                {
+                    
+
+                    //Click on save button to apply changes
+                    Save.Click();
+
+                }
+            }
         }
     }
 }

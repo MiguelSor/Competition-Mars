@@ -13,6 +13,8 @@ namespace MarsFramework.Global
 {
     class GlobalDefinitions
     {
+        internal static object driver;
+
         //Initialise the browser
         public static IWebDriver Driver { get; set; }
 
@@ -144,7 +146,7 @@ namespace MarsFramework.Global
 
                 if (Directory.Exists(folderLocation))
                 {
-                    System.IO.Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\Miguel's Screenshots");
+                    System.IO.Directory.CreateDirectory(folderLocation);
                 }
 
                 var screenShot = ((ITakesScreenshot)driver).GetScreenshot();
