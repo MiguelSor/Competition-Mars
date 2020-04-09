@@ -21,6 +21,10 @@ namespace MarsFramework.Pages
         [FindsBy(How = How.XPath, Using = "//*[contains(text(),'Selenium')]")]
         private IWebElement EditListingsLink { get; set; }
 
+        //View Delete Listings Link
+        [FindsBy(How = How.XPath, Using = "(//td[@class='four wide'][contains(.,'Title edited')])")]
+        private IWebElement DeleteListingsLink { get; set; }
+
         //Enter the Title in textbox
         [FindsBy(How = How.XPath, Using = "//input[contains(@name,'title')]")]
         private IWebElement Title { get; set; }
@@ -54,7 +58,7 @@ namespace MarsFramework.Pages
         private IWebElement view { get; set; }
 
         //Delete the listing
-        [FindsBy(How = How.XPath, Using = "//table[1]/tbody[1]")]
+        [FindsBy(How = How.XPath, Using = "(//i[contains(@class,'remove icon')])")]
         private IWebElement delete { get; set; }
 
         //Edit the listing
@@ -82,7 +86,7 @@ namespace MarsFramework.Pages
             //See if listing is displayed and click on edit icon of that listing
             if (EditListingsLink.Displayed && edit.Displayed)
             {
-                if (EditListingsLink.Text == "Selenium" && edit.Equals(GlobalDefinitions.Driver.FindElement(By.XPath("(//i[@class='outline write icon'])"))))
+                if (EditListingsLink.Text == "Selenium" && edit.Equals(GlobalDefinitions.Driver.FindElement(By.XPath(("//i[@class='outline write icon']")))))
                 {
                     edit.Click();
 
@@ -128,18 +132,24 @@ namespace MarsFramework.Pages
             //Click on Manage Listings
             manageListingsLink.Click();
 
-            //Wait for the Title of the listing to appear
-            GlobalDefinitions.WaitForElement(GlobalDefinitions.Driver, By.XPath("//*[contains(text(),'Title Edited')]"), (20));
+            GlobalDefinitions.WaitForElement(GlobalDefinitions.Driver, By.XPath("(//td[@class='four wide'][contains(.,'Title edited')])"), 20);
+             
 
             //See if listing is displayed and click on edit icon of that listing
-            if (EditListingsLink.Displayed && edit.Displayed)
+            if (DeleteListingsLink.Displayed && delete.Displayed)
             {
-                if (EditListingsLink.Text == "Title Edited" && edit.Equals(GlobalDefinitions.Driver.FindElement(By.XPath("(//i[@class='outline write icon'])"))))
+                if (DeleteListingsLink.Text == "Title edited" && delete.Equals(GlobalDefinitions.Driver.FindElement(By.XPath("(//i[contains(@class,'remove icon')])"))))
                 {
-                    
 
-                    //Click on save button to apply changes
-                    Save.Click();
+                    //press the delete button
+                    delete.Click();
+
+                    if (!DeleteListingsLink.Displayed && delete.Equals(GlobalDefinitions.Driver.FindElement(By.XPath("(//i[contains(@class,'remove icon')])"))))
+                    {
+                        //Wait for Manage Listings to appear
+                        GlobalDefinitions.WaitForElement(GlobalDefinitions.Driver, By.LinkText("Manage Listings"), (20));
+                    }
+
 
                 }
             }

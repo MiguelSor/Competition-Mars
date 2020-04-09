@@ -13,23 +13,28 @@ namespace MarsFramework
             [Test,Order(1)]
             public void EnterShareSkill()
             {
+                //Create an instance of Share Skill Method from ShareSkill.cs
                 ShareSkill ShareSkillPage = new ShareSkill();
-                //Test Share Skill Page, Enter Share Skill Method
+                //Test Share Skill method
                 ShareSkillPage.EnterShareSkill();
             }
 
             [Test,Order(2)]
             public void EditShareSkill()
             {
-                ManageListings EditShareSkillPage = new ManageListings();
-                //Test Share Skill Page, Enter Edit Share Skill Method
-                EditShareSkillPage.EditShareSkill();
+                //Create an instance of Edit Share Skill Method from ManageListings.cs
+                ManageListings EditShareSkillListing = new ManageListings();
+                //Test EditShareSkill method
+                EditShareSkillListing.EditShareSkill();
             }
 
             [Test,Order(3)]
             public void DeleteShareSkill()
             {
-
+                //Create an instance of Delete Share Skill Method from ManageListings.cs
+                ManageListings DeleteShareSkillListing = new ManageListings();
+                //Test DeleteShareSkill method
+                DeleteShareSkillListing.DeleteShareSkill();
             }
 
 
