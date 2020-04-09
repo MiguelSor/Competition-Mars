@@ -3,7 +3,7 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using System;
-
+using System.Threading;
 
 namespace MarsFramework.Pages
 {
@@ -157,8 +157,7 @@ namespace MarsFramework.Pages
             //Save the skill
             Save.Click();
 
-            //Global.GlobalDefinitions.WaitForElement(Global.GlobalDefinitions.Driver,By.XPath("//*[contains(text(),'Would like to provide selenium training for beginners'"),(20));
-
+            Thread.Sleep(2000);
 
         }
     }

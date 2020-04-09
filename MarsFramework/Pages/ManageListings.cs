@@ -66,7 +66,7 @@ namespace MarsFramework.Pages
         private IWebElement edit { get; set; }
 
         //Click on Yes or No
-        [FindsBy(How = How.XPath, Using = "//div[@class='actions']")]
+        [FindsBy(How = How.XPath, Using = "//button[@class='ui icon positive right labeled button'][contains(.,'Yes')]")]
         private IWebElement clickActionsButton { get; set; }
 
         internal void EditShareSkill()
@@ -120,6 +120,8 @@ namespace MarsFramework.Pages
                     //Click on save button to apply changes
                     Save.Click();
 
+                    Thread.Sleep(2000);
+
                 }
             }
         }
@@ -133,7 +135,7 @@ namespace MarsFramework.Pages
             manageListingsLink.Click();
 
             GlobalDefinitions.WaitForElement(GlobalDefinitions.Driver, By.XPath("(//td[@class='four wide'][contains(.,'Title edited')])"), 20);
-             
+
 
             //See if listing is displayed and click on edit icon of that listing
             if (DeleteListingsLink.Displayed && delete.Displayed)
@@ -144,11 +146,9 @@ namespace MarsFramework.Pages
                     //press the delete button
                     delete.Click();
 
-                    if (!DeleteListingsLink.Displayed && delete.Equals(GlobalDefinitions.Driver.FindElement(By.XPath("(//i[contains(@class,'remove icon')])"))))
-                    {
-                        //Wait for Manage Listings to appear
-                        GlobalDefinitions.WaitForElement(GlobalDefinitions.Driver, By.LinkText("Manage Listings"), (20));
-                    }
+                    clickActionsButton.Click();
+
+                    Thread.Sleep(2000);
 
 
                 }
@@ -156,3 +156,5 @@ namespace MarsFramework.Pages
         }
     }
 }
+
+
